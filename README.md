@@ -1,0 +1,2 @@
+# farruxnet.uz
+Shaxsiy blog
