@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -25,20 +26,16 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     CHOICES = (
         ('oz', 'O\'zbek'),
-        ('uz', 'Узбек'),
-        ('ru', 'Руский'),
         ('en', 'Ingliz'),
     )
-    phone_number = models.CharField(max_length=12, unique=True, null=True, blank=True)
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=50, null=True, blank=True)
-    username = models.CharField(max_length=50, null=True, blank=True)
+    username = models.CharField(max_length=50, null=True, unique=True)
     language = models.CharField(choices=CHOICES, max_length=3)
     description = models.TextField(null=True, blank=True)
-    amount = models.IntegerField(default=0)
     create_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -58,32 +55,11 @@ class User(AbstractBaseUser):
         return True
 
     class Meta:
-        verbose_name="Foydalanuvchi"
-        verbose_name_plural="Foydalanuvchilar"
+        verbose_name = "Foydalanuvchi"
+        verbose_name_plural = "Foydalanuvchilar"
 
     @property
     def is_staff(self):
         return self.is_admin
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ########################

@@ -11,7 +11,6 @@ __pycache__/
 build/
 develop-eggs/
 dist/
-migrations/
 downloads/
 eggs/
 .eggs/
@@ -51,15 +50,20 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
-
+.idea
+.idea/
+*.xhtml
+*.xml
 # Translations
 *.mo
 *.pot
-
+admin/
+jazzmin/
+vendor/
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
+#db.sqlite3
 db.sqlite3-journal
 
 # Flask stuff:

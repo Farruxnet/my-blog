@@ -4,7 +4,8 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
-from . models import User
+from .models import User
+
 
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -36,7 +37,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password',  'is_active', 'is_admin')
+        fields = ('email', 'password', 'is_active', 'is_admin')
 
 
 class UserAdmin(BaseUserAdmin):
@@ -44,23 +45,23 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
-
-    list_display = ('email',  'is_admin')
+    list_display = ('email', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('email', 'name', 'language', 'description', 'amount',)}),
+        (None, {'fields': ('email', 'name', 'language', 'description',)}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'name', 'language', 'description', 'amount',),
+            'fields': ('email', 'password1', 'password2', 'name', 'language', 'description',),
         }),
     )
-    search_fields = ('phone_number',)
-    ordering = ('phone_number',)
+    search_fields = ('email',)
+    ordering = ('id',)
     filter_horizontal = ()
 
+
 admin.site.register(User, UserAdmin)
-admin.site.unregister(Group)
+# admin.site.unregister(Group)
