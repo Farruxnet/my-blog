@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 BASE_DIR = Path(__file__).resolve().parent.parent
+from django.utils.translation import gettext_lazy as _
 
 
 
@@ -26,7 +27,9 @@ INSTALLED_APPS = [
     'apps.blog',
     'apps.users',
     'query_counter',
-    'apps.app'
+    'apps.app',
+    'django_ace',
+    'django_ckeditor_5',
 ]
 
 MIDDLEWARE = [
@@ -132,15 +135,9 @@ customColorPalette = [
         },
     ]
 
-CKEDITOR_5_FILE_STORAGE = "core.utils.storage.CkStorage" # optional
+CKEDITOR_5_FILE_STORAGE = "apps.app.utils.storage.CkStorage" # optional
 CKEDITOR_5_CONFIGS = {
     'default': {
-        'toolbar': ['heading', '|', 'bold', 'italic', 'link',
-                    'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
-        'height': 300,
-        'width': 300,
-    },
-    'extends': {
         'blockToolbar': [
             'paragraph', 'heading1', 'heading2', 'heading3',
             '|',
@@ -149,7 +146,7 @@ CKEDITOR_5_CONFIGS = {
             'blockQuote',
         ],
         'toolbar': ['heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
-        'code','subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
+         'codesnippet', 'subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
                     'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', 'imageUpload', '|',
                     'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
                     'insertTable',],
@@ -196,13 +193,13 @@ CKEDITOR_5_CONFIGS = {
 }
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "Panel",
+    "site_title": _("Panel"),
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "Oriental University",
+    "site_header": "Farrux Elomonov",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "Oriental University",
+    "site_brand": "Farrux Elomonov",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
     # "site_logo": "books/img/logo.png",
@@ -220,10 +217,10 @@ JAZZMIN_SETTINGS = {
     "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "Welcome to Oriental University",
+    "welcome_sign": _("Welcome!"),
 
     # Copyright on the footer
-    "copyright": "Oriental University",
+    "copyright": "Farrux Elomonov",
 
     # List of model admins to search from the search bar, search bar omitted if excluded
     # If you want to use a single search field you dont need to use a list, you can use a simple string
@@ -240,10 +237,10 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
 
         # Url that gets reversed (Permissions can be added)
-        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": _("Bosh sahifa"),  "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # external url that opens in a new window (Permissions can be added)
-        {"name": "Support", "url": "https://farruxnet.t.me", "new_window": True},
+        {"name": _("Qullab quvvatlash"), "url": "https://farruxnet.t.me", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},
@@ -258,7 +255,7 @@ JAZZMIN_SETTINGS = {
 
     # Additional links to include in the user menu on the top right ("app" url type is not allowed)
     "usermenu_links": [
-        {"name": "Support", "url": "https://farruxnet.t.me", "new_window": True},
+        {"name": _("Qullab quvvatlash"), "url": "https://farruxnet.t.me", "new_window": True},
         {"model": "auth.user"}
     ],
 

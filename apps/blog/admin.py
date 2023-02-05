@@ -15,7 +15,7 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ['views', ]
 
 
 @admin.register(Comments)
