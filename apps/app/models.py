@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from django_ckeditor_5.fields import CKEditor5Field
 from django.utils.translation import gettext_lazy as _
 
@@ -30,7 +31,7 @@ class AppSettings(models.Model):
     address = models.TextField(max_length=255, verbose_name=_("Manzil"))
 
     def __str__(self):
-        return _("Sayt sozlamalri")
+        return "Sayt sozlamalri"
 
     class Meta:
         verbose_name = _("Sayt sozlamasi")
@@ -40,7 +41,13 @@ class AppSettings(models.Model):
 class Page(BaseModel):
     title = models.CharField(max_length=255)
     body = CKEditor5Field()
+    slug = models.SlugField(blank=True, max_length=255, verbose_name=_("Slug"))
     views = models.PositiveIntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(Page, self).save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.title}'

@@ -42,7 +42,12 @@ class Post(BaseModel):
     category = models.ManyToManyField(Category, verbose_name=_("Bo'lim"))
     tag = models.ManyToManyField(Tag, verbose_name=_("Taglar"))
     photo = models.ImageField(upload_to='post_images/', verbose_name=_("Post uchun rasm"))
+    slug = models.SlugField(blank=True, max_length=255, verbose_name=_("Slug"))
     views = models.IntegerField(default=0, verbose_name=_("Ko'rishlar soni"))
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
