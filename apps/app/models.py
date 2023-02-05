@@ -6,8 +6,10 @@ from django.utils.translation import gettext_lazy as _
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Qo'shilgan vaqi"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Yangilangan vaqti"))
-    created_by = models.ForeignKey('users.User', on_delete=models.CASCADE, null=True, blank=True, related_name='created_by_%(model_name)ss', verbose_name=_("Qo'shdi"))
-    updated_by = models.ForeignKey('users.User', on_delete=models.CASCADE, null=True, blank=True, related_name='updated_by_%(model_name)ss', verbose_name=_("Yangiladi"))
+    created_by = models.ForeignKey('users.User', on_delete=models.CASCADE, null=True, blank=True,
+                                   related_name='created_by_%(model_name)ss', verbose_name=_("Qo'shdi"))
+    updated_by = models.ForeignKey('users.User', on_delete=models.CASCADE, null=True, blank=True,
+                                   related_name='updated_by_%(model_name)ss', verbose_name=_("Yangiladi"))
 
     class Meta:
         abstract = True
@@ -33,3 +35,16 @@ class AppSettings(models.Model):
     class Meta:
         verbose_name = _("Sayt sozlamasi")
         verbose_name_plural = _("Sayt sozlamalri")
+
+
+class Page(BaseModel):
+    title = models.CharField(max_length=255)
+    body = CKEditor5Field()
+    views = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.title}'
+
+    class Meta:
+        verbose_name = _("Sahifa")
+        verbose_name_plural = _("Sahifalar")
