@@ -38,12 +38,14 @@ class Tag(BaseModel):
 class Post(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("Avtor"))
     name = models.CharField(max_length=255, verbose_name=_("Nomi"))
+    description = models.TextField(max_length=255, verbose_name=_("Qisqa matn"))
     text = CKEditor5Field(verbose_name=_("To'liq matn"))
     category = models.ManyToManyField(Category, verbose_name=_("Bo'lim"))
     tag = models.ManyToManyField(Tag, verbose_name=_("Taglar"))
     photo = models.ImageField(upload_to='post_images/', verbose_name=_("Post uchun rasm"))
     slug = models.SlugField(blank=True, max_length=255, verbose_name=_("Slug"))
     views = models.IntegerField(default=0, verbose_name=_("Ko'rishlar soni"))
+    is_active = models.BooleanField(default=False, verbose_name=_("Holati"))
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)

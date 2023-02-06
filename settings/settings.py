@@ -44,7 +44,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'settings.urls'
-
+PAGE_SIZE = 10
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

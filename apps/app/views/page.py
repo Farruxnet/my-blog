@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from app.utils.site_context import context_site_sum
+from apps.app.utils.site_context import context_site_sum
 from apps.app.models import Page
 
 
