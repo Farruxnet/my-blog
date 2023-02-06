@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>{{ context_site.title }}</title>
+    <title>{{ page_title }} | {{ title }}</title>
     <link rel="icon" type="image/x-icon" href="{% static 'site/assets/favicon.ico' %}"/>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -49,32 +49,58 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <ul class="list-inline text-center">
-                    <li class="list-inline-item">
-                        <a href="#!">
+                    {% if twitter %}
+                        <li class="list-inline-item">
+                            <a href="#!">
                                     <span class="fa-stack fa-lg">
                                         <i class="fas fa-circle fa-stack-2x"></i>
                                         <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
                                     </span>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#!">
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if telegram %}
+                        <li class="list-inline-item">
+                            <a href="https://t.me/{{ telegram }}">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-telegram fa-stack-1x fa-inverse"></i>
+                                    </span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if facebook %}
+                        <li class="list-inline-item">
+                            <a href="https://fb.com/{{ facebook }}">
                                     <span class="fa-stack fa-lg">
                                         <i class="fas fa-circle fa-stack-2x"></i>
                                         <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
                                     </span>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#!">
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if github %}
+                        <li class="list-inline-item">
+                            <a href="https://github.com/{{ github }}">
                                     <span class="fa-stack fa-lg">
                                         <i class="fas fa-circle fa-stack-2x"></i>
                                         <i class="fab fa-github fa-stack-1x fa-inverse"></i>
                                     </span>
-                        </a>
-                    </li>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if linkedin %}
+                        <li class="list-inline-item">
+                            <a href="https://github.com/{{ linkedin }}">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
-                <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2022</div>
+                <div class="small text-center text-muted fst-italic">{{ footer | safe }}</div>
             </div>
         </div>
     </div>
