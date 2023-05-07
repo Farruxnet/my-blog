@@ -322,12 +322,11 @@ MEDIA_PATH_URL = 'upload/media/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
 if DEBUG:
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, "static"), # your static/ files folder
-    ]
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = (os.path.join('static'),)
 else:
+    STATIC_URL = '/static/'
     STATICFILES_DIR = BASE_DIR / '/static/'
     STATIC_ROOT = BASE_DIR / 'static/'
 
